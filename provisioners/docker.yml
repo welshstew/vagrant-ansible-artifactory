@@ -1,0 +1,4 @@
+- name: Docker Playbook
+  hosts: default
+  roles:
+    - docker

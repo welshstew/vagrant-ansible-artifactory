@@ -1,0 +1,12 @@
+---
+- name: download docker installation script
+  sudo: yes
+  get_url: url=https://get.docker.com/ dest=/etc/docker.sh mode=740
+
+- name: install docker
+  sudo: yes
+  shell: /etc/docker.sh
+
+- name: remove docker installation script
+  sudo: yes
+  file: path=/etc/docker.sh state=absent
