@@ -1,4 +1,12 @@
 ---
+- name: data container
+  docker:
+    name: mydata
+    image: busybox
+    state: present
+    volumes:
+    - /data
+    
 - name: install artifactory container app
   sudo: yes
   docker:
@@ -9,4 +17,11 @@
         - "80:80"
         - "8081:8081"
         - "443:443"
-        - "5000-5002:5000-5002"
+        - "5000:5000"
+        - "5001:5001"
+        - "5002:5002"
+     volumes:
+        - "/home/vagrant/share/artifactory/data:/var/opt/jfrog/artifactory/data"
+        - "/home/vagrant/share/artifactory/logs:/var/opt/jfrog/artifactory/logs"
+        - "/home/vagrant/share/artifactory/backup:/var/opt/jfrog/artifactory/backup"
+        - "/home/vagrant/share/artifactory/etc:/var/opt/jfrog/artifactory/etc"

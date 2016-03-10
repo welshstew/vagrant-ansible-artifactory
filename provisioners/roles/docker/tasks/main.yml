@@ -5,4 +5,4 @@
 - include: install-docker.yml
   when: ansible_distribution in [ 'Debian', 'Ubuntu' ]
 
-- include: install-container.yml
+- include: install-artifactory.yml

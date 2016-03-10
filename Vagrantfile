@@ -60,11 +60,13 @@ Vagrant.configure(2) do |config|
     artifactory.vm.hostname = "artifactory.vagrant.local"
     artifactory.vm.network "private_network", ip: "10.1.2.22"
 
-    # Share .m2
-    # bp_ose_single.vm.synced_folder "~/.m2/", "/home/vagrant/.m2/", type: "nfs"
+    # Share a folder
+    artifactory.vm.synced_folder "~/share/artifactory", "/home/vagrant/share/artifactory"
 
     # Config the box
-    artifactory.vm.provision :ansible, ansible.playbook: "provisioners/docker.yml"
+    artifactory.vm.provision "ansible" do  |ansible|
+      ansible.playbook = "provisioners/docker.yml"
+    end
 
     # Complete message
     artifactory.vm.post_up_message = "https://artifactory.vagrant.local:8080/"
